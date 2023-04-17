@@ -50,28 +50,38 @@ if __name__ == '__main__':
     # define P2
 #Hydrogen
 γ = 1.405
-V_1 = pi*(1/2 * 0.0995)**2*(79)
-V_2 = 0.000100
+V_1 = pi*(1/2 * 99.5)**2*(79)
+V_2 = 0.100
 #atmospheric pressure
-T_2= 244 #still have to change
+SH = 517.15 #244 degrees celcius maybe, have to look at data
 # heat of combustion?
+Cv = 283.333
 T_1= 294
-P_0 = 101352
+P_0 = 14.7
 k = P_0 * V_1**γ
-
+Delta_T = (SH/Cv) *1000
+T_2 = T_1 + Delta_T
 def P(V_2): #psi
     return k / V_2**γ + P_0
 
+P_2 = (P(V_2)/T_1)*T_2
 #Bore of engine = 99.5mm, stroke of engine = 79mm
 Volume_Range =np.linspace(V_2, V_1)
 Pressure_Range =P(Volume_Range)
 print(V_1)
 print(P(V_2))
 print(k)
+print(T_2)
+print(P_2)
 
 
 
-plt.plot(Volume_Range, Pressure_Range)
-plt.xlabel('volume (mm**3)')
-plt.ylabel('pressure (psi)')
+
+plt.plot(Volume_Range, P(Volume_Range))
+plt.xlabel('volume (m**3)')
+plt.ylabel('pressure (pascal)')
+plt.scatter(V_1, )
+#plt.scatter(V_1, V_1)
+plt.scatter(V_1, P_0)
 plt.show()
+

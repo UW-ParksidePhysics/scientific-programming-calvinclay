@@ -71,27 +71,27 @@ plt.show()  # display the graph
 #
 # Does the code run without error?
 # If any error occurs, can you suggest a potential fix?
-#
+# The code runs without error; however, there is an error in one of the packages. I don't believe there is a potential fix for this.
 # How understandable is the output of the code?
 # Point out any parts you do not understand.
-#
+# The code is very understandable; however, there are no units. I am assuming that m/s**2 is the unit for gravity and that mass is in grams and diameter is in meters but it is unclear. The variable 't' is hard to understand since there is no def, maybe it represents time.
 # How readable is the code itself?
 # Say where formatting or commenting would make the code more readable or where PEP-8 is violated.
-#
+# The code itself is very readable and very well formatted.
 # How clearly do the code comments describe the problem it is trying to solve?
 # Identify places that would benefit from a clearer comment.
-#
+# The code comments are pretty clear, but I was unsure what was being solved for. Toward the top of the comments it said "while 't'<2" but again t is not defined.
 # How clearly do the variable names relate to the concepts they concretize?
 # Point out any variables you don't recognize, and/or suggest better names. Check for PEP-8 compliance.
-#
+# The variable names are mostly clear, but again variable 't' is my biggest complaint.
 # How well does the range of variables capture the problem described?
 # Identify extraneous regions that could be left out or important regions that should be included.
-#
+# The range is of variable are capture very well, but the position_x and position_y is unclear. There are no lables on x or y-axis so I'm not sure what the values represent.
 # To what degree does the script follow a functional programming paradigm, packaging all major components of the script
 # into separately defined functions that pass information among them in a small number of lines? Identify ways in which
 # the functionalization of the code could be improved.
 # How clearly do the visualizations show the solutions to the problem?
-#
+# The script is has a very functional programming paradigm. There is not too much lines of code and everything is well kept. The visualization shows the solutions to the problem but it is little unclear what the problem is, the only way I know what the problem is about is by looking at the .py file name.
 # Say if there is extraneous whitespace or the co-domain or domain of the data should be changed or any other ways the
 # visualizations could be more effective
-#
+# titles on x and y-axis would be beneficial, a title would also be helpful to state what is being solved for. Including units on each of the axis would also help understand the graph more.
