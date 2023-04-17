@@ -56,6 +56,7 @@ V_2 = 0.000100
 T_2= 244 #still have to change
 # heat of combustion?
 T_1= 294
+P_0 = 101352
 k = P_0 * V_1**γ
 
 def P(V_2): #psi
@@ -67,12 +68,10 @@ Pressure_Range =P(Volume_Range)
 print(V_1)
 print(P(V_2))
 print(k)
-print(P_0)
-print(P_1)
+
 
 
 plt.plot(Volume_Range, Pressure_Range)
 plt.xlabel('volume (mm**3)')
 plt.ylabel('pressure (psi)')
-plt.plot(P_0, P_1)
 plt.show()
