@@ -49,27 +49,30 @@ if __name__ == '__main__':
     # calculate ΔT at fixed V
     # define P2
 #Hydrogen
-k = 1.405
-γ= k
-V_1 = pi*(1/2 * 99.5)**2*(79)
-V_2 = 0.100
-P_0= 14.7
+γ = 1.405
+V_1 = pi*(1/2 * 0.0995)**2*(79)
+V_2 = 0.000100
 #atmospheric pressure
-T_2= 244
+T_2= 244 #still have to change
 # heat of combustion?
-T_1= 25
+T_1= 294
+k = P_0 * V_1**γ
+
 def P(V_2): #psi
     return k / V_2**γ + P_0
 
 #Bore of engine = 99.5mm, stroke of engine = 79mm
 Volume_Range =np.linspace(V_2, V_1)
-Pressure_Range =np.linspace(P(V_2), P_0)
+Pressure_Range =P(Volume_Range)
 print(V_1)
 print(P(V_2))
+print(k)
+print(P_0)
+print(P_1)
 
 
 plt.plot(Volume_Range, Pressure_Range)
 plt.xlabel('volume (mm**3)')
 plt.ylabel('pressure (psi)')
-plt.plot(P_0)
+plt.plot(P_0, P_1)
 plt.show()
