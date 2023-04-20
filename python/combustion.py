@@ -50,39 +50,51 @@ if __name__ == '__main__':
     # define P2
 #Hydrogen
 γ = 1.405
-Volume_1 = np.pi*(1/2 * 0.0995)**2*(0.079)
-Volume_2 = 0.000100
+open_volume = np.pi * (1 / 2 * 0.0995) ** 2 * (0.079)
+compressed_volume = 0.000100
 Specific_Heat = 517.15 #244 degrees celcius maybe, have to look at data
 # heat of combustion?
 Constant_volume = 283.333
 Tempature_1= 294
 Pressure_0 = 101.3 * 10**3 #atmospheric pressure
-k = Pressure_0 * Volume_1**γ
+adiabatic_constant_1_2 = Pressure_0 * open_volume ** γ
 Delta_Tempature = (Specific_Heat/Constant_volume) *1000
 Tempature_2 = Tempature_1 + Delta_Tempature
-def P(Volume_2):
-    return (k / (Volume_2**γ)) + Pressure_0
+def P(volume, k, initial_pressure):
+    return (k / (volume**γ)) + initial_pressure
 
-Pressure_2 = (P(Volume_2)/Tempature_1)*Tempature_2
+Pressure_2 = (P(compressed_volume, adiabatic_constant_1_2, Pressure_0) / Tempature_1) * Tempature_2
 #Bore of engine = 99.5mm, stroke of engine = 79mm
-Volume_Range =np.linspace(Volume_2, Volume_1)
-Pressure_Range =P(Volume_Range)
+Volume_Range =np.linspace(compressed_volume, open_volume)
+volumes = [Volume_Range, Volume_Range, np.full(len(Volume_Range), compressed_volume), compressed_volume, Volume_Range,
+           np.full(len(Volume_Range), compressed_volume), (open_volume)]
+Pressure_Range =P(Volume_Range, adiabatic_constant_1_2, Pressure_0)
 
-print(Volume_1)
-print(P(Volume_2))
-print(k)
+
+print(open_volume)
+#print(P(compressed_volume))
+
 print(Tempature_2)
 print(Pressure_2)
 
 #P_2 to P_3
 
 #V_min to V_max at P_0
-pressures = np.full(len(Volume_Range), Pressure_0)
-plt.plot(Volume_Range, pressures)
 
-plt.plot(Volume_Range, P(Volume_Range))
+pressures = [np.full(len(Volume_Range), Pressure_0), P(Volume_Range, adiabatic_constant_1_2, Pressure_0),
+             np.linspace(P(Pressure_2, adiabatic_constant_1_2, Pressure_0), num=len(Volume_Range), stop=True)]
+for pressure in pressures:
+    plt.plot(Volume_Range, pressure)
+
+#pressures_1 = np.full(len(Pressure_Range), Volume_2)
+#plt.plot(Pressure_Range, pressures_1)
+
+plt.plot(Volume_Range, P(Volume_Range, adiabatic_constant_1_2, compressed_volume))
 plt.xlabel('volume (m**3)')
 plt.ylabel('pressure (pascal)')
+
+
+#plt.plot(np.full(len(compressed_volume, )
 
 
 plt.show()
