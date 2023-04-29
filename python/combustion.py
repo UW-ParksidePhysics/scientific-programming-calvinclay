@@ -17,19 +17,7 @@ Then we make gas dictionary that has gas name as key and
 def get_gas_data():
     gas_data_url = 'https://www.ohio.edu/mechanical/thermo/property_tables/gas/idealGas.html'
     gas_data = scrape_web_data(gas_data_url)[0]
-    # gas_names = gas_data[0]
-    # gas_ratios = gas_data[6]
     desired_gases = ['Hydrogen', 'Methane', 'Octane', 'Butane']
-    # gas_ratios_dictionary = {}
-    # for desired_gas in desired_gases:
-    #     for index, row in gas_data.iterrows():
-    #         if row[0] == desired_gas:
-    #             gas_ratios_dictionary[row[0]] = row[6]
-
-    # gas_data = scrape_web_data(gas_data_url)[0]
-    # gas_names = gas_data[0]
-    # gas_ratios = gas_data[6]
-    # desired_gases = ['Hydrogen', 'Methane', 'Octane', 'Butane']
     gas_data_dictionary = {}
     for desired_gas in desired_gases:
         for index, row in gas_data.iterrows():
@@ -67,7 +55,7 @@ def calculate_pressure(input_volume, k, exponent):
     return k / np.power(input_volume, exponent)
 
 '''
-A function of the compressable volumes as the otto cycle is in process.
+A function of the compressible volumes as the otto cycle is in process.
 '''
 def calculate_otto_cycle_pressures(volumes, parameters):
     gamma = parameters[0]
@@ -86,11 +74,7 @@ def calculate_otto_cycle_pressures(volumes, parameters):
     '''Temperature Calculations'''
     temperature_change = (fuel_mass*heat_of_combustion) / (air_mass*air_isochoric_specific_heat)
     raised_temperature = initial_temperature + temperature_change
-    #print(f'T={temperature_change}')
-    #print(f'Fuel={fuel_mass}')
-    #print(f'Air mass={air_mass}')
-    #print(f'heat of combustion= {heat_of_combustion}')
-    #print(f'air of specific heat= {air_isochoric_specific_heat}')
+
 
     '''Calculating curves of pressures on volume'''
     adiabatic_constant_1_2 = initial_pressure * open_volume ** gamma    # Const. for 1 to 2 curve
@@ -132,25 +116,26 @@ if __name__ == '__main__':
     air_mass = density_of_air*open_volume
     air_specific_heat = 0.718
 
-    figure, axes = plt.subplots(ncols=2, nrows=3)
+    figure, axes = plt.subplots(ncols=2, nrows=2)
     index, column_index, row_index = 0, 0, 0
-    #need to uncomment for command and indent everything below it
     for gas in gas_data.keys():
         fuel_density, γ, isochoric_specific_heat, heat_of_combustion = extract_gas_data(gas, gas_data)
         fuel_mass = fuel_to_air_ratio * open_volume * fuel_density
         gas_pressures = calculate_otto_cycle_pressures(volumes, [γ, initial_pressure, heat_of_combustion,
                                                                  isochoric_specific_heat,
                                                                  initial_temperature, fuel_mass])
-        heat_in = fuel_mass * heat_of_combustion
+
         column_index, row_index = index % 2, int(index / 2)
         index += 1
 
         for branch_index, (volume, pressure) in enumerate(zip(volumes, gas_pressures)):
             axes[column_index][row_index].plot(volume, pressure, label=f"{branch_index}")
-            # axes[column_index][row_index].legend()
-    # figure_ , axes_ = plt.subplots(ncols= 1, nrows=1)
-# efficency
-# net_work = np.trapz(pressures[3], volume_range) - np.trapz(pressures[1], volume_range)
-# efficency = net_work / heat_in
-# print(efficency)
+            axes[column_index][row_index].legend()
+figure_ , axes_ = plt.subplots(ncols= 1, nrows=1)
+
+# efficiency
+#heat_in = fuel_mass * heat_of_combustion
+#net_work = np.trapz(pressures[3], volume_range) - np.trapz(pressures[1], volume_range)
+#efficiency = net_work / heat_in
+#print(efficiency)
 plt.show()
