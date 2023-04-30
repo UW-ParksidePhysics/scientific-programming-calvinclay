@@ -122,7 +122,7 @@ def plot_gas_data(initial_conditions, particular_gas_data):
     """
     pressure_1 = initial_conditions[0]
     temperature_1 = initial_conditions[1]
-
+    all_gas_pressures = {}
     index, column_index, row_index = 0, 0, 0
     for gas in particular_gas_data.keys():
         fuel_density, γ, isochoric_specific_heat, heat_of_combustion = extract_gas_data(gas, particular_gas_data)
@@ -130,7 +130,7 @@ def plot_gas_data(initial_conditions, particular_gas_data):
         gas_pressures = calculate_otto_cycle_pressures(volumes, [γ, initial_pressure, heat_of_combustion,
                                                                  isochoric_specific_heat,
                                                                  initial_temperature, fuel_mass])
-
+        all_gas_pressures[gas] = gas_pressures
         column_index, row_index = index % 2, int(index / 2)
         index += 1
 
