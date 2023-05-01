@@ -127,18 +127,17 @@ def plot_gas_data(initial_conditions, particular_gas_data):
     for gas in particular_gas_data.keys():
         fuel_density, γ, isochoric_specific_heat, heat_of_combustion = extract_gas_data(gas, particular_gas_data)
         fuel_mass = fuel_to_air_ratio * open_volume * fuel_density
-        gas_pressures = calculate_otto_cycle_pressures(volumes, [γ, initial_pressure, heat_of_combustion,
+        gas_pressures = calculate_otto_cycle_pressures(volumes, [γ, pressure_1, heat_of_combustion,
                                                                  isochoric_specific_heat,
-                                                                 initial_temperature, fuel_mass])
+                                                                 temperature_1, fuel_mass])
         all_gas_pressures[gas] = gas_pressures
         column_index, row_index = index % 2, int(index / 2)
         index += 1
 
         for branch_index, (volume, pressure) in enumerate(zip(volumes, gas_pressures)):
             axes[column_index][row_index].plot(volume, pressure, label=f"{branch_index}")
-            axes[column_index][row_index].legend()
-
-    return gas_pressures
+        axes[column_index][row_index].set_title(gas)
+    return all_gas_pressures
 
 
 def calculate_work(given_volumes, given_pressures, given_gas_data):
@@ -149,19 +148,30 @@ def calculate_work(given_volumes, given_pressures, given_gas_data):
     :param given_gas_data:
     :return:
     """
-    # heat_in = fuel_mass * heat_of_combustion
-    # net_work = np.trapz(pressures[3], volume_range) - np.trapz(pressures[1], volume_range)
-    works = []
-    return works
+    given_volume_range=given_volumes[0]
+    for given_gas in given_gas_data:
+        fuel_density, _, _, heat_of_combustion = extract_gas_data(given_gas, given_gas_data)
+        given_gas_data[given_gas]['heat in'] = fuel_density * heat_of_combustion
+        net_work = np.trapz(given_pressures[given_gas][3], given_volume_range) - np.trapz(given_pressures[given_gas][1], given_volume_range)
+        given_gas_data[given_gas]['net work'] = net_work
+    return given_gas_data
 
 
-def plot_efficiency(works_to_plot):
+def plot_efficiency(expanded_gas_data):
     """
     Plots work out vs work in for all the works given in works_to_plot
     :param works_to_plot:
     :return:
     """
+    for worked_gas in expanded_gas_data.keys():
+        plt.scatter(expanded_gas_data[worked_gas]['heat in'],
+                    expanded_gas_data[worked_gas]['net work'],
+                    label=worked_gas)
     # efficiency = net_work / heat_in
+    plt.xlabel('heat in')
+    plt.ylabel('net work')
+    plt.yscale('log')
+    plt.legend()
     return
 
 
@@ -194,6 +204,7 @@ if __name__ == '__main__':
     figure, axes = plt.subplots(ncols=2, nrows=2)
     calculated_pressures = plot_gas_data([initial_pressure, initial_temperature], gas_data)
     calculated_works = calculate_work(volumes, calculated_pressures, gas_data)
+
+    plt.show()
     plot_efficiency(calculated_works)
     plt.show()
-
