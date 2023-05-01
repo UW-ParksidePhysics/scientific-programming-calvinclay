@@ -137,6 +137,7 @@ def plot_gas_data(initial_conditions, particular_gas_data):
         for branch_index, (volume, pressure) in enumerate(zip(volumes, gas_pressures)):
             axes[column_index][row_index].plot(volume, pressure, label=f"{branch_index}")
         axes[column_index][row_index].set_title(gas)
+
     return all_gas_pressures
 
 
