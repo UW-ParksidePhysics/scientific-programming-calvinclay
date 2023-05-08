@@ -2,7 +2,7 @@
 Return statistics on a set of data.
 """
 
-__author__ = 'Calvin Clay'
+__author__ =  'Michael Hotchkiss and Calvin Clay'
 
 import numpy as np
 from scipy import stats
