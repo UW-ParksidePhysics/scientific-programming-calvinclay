@@ -2,7 +2,7 @@
 Finds quadratic coefficients
 """
 
-__author__ = 'Michael Hotchkiss'
+__author__ =  'Michael Hotchkiss and Calvin Clay'
 import numpy as np
 
 
