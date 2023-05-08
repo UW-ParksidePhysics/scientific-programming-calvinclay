@@ -1,7 +1,7 @@
 """
 This plots a set of data with a fit curve and the points itself.
 """
-__author__ = "Michael and Calvin"
+__author__ = "Michael and Calvin "
 
 import numpy as np
 import matplotlib.pyplot as plt
