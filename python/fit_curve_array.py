@@ -1,11 +1,19 @@
+"""
+This prints x and y values in an array which the y values are computed by the quadratic equation
+"""
+
+__author__ = 'Michael Hotchkiss'
 import numpy as np
 
 
 def fit_curve_array(quadratic_coefficients, min_x, max_x, number_of_points=100):
     """
-
-    :param
-    :return:
+    This returns x and y values which the y values are computed by the quadratic equation
+    :param quadratic_coefficients: shape(3,)
+    :param min_x: float
+    :param max_x: float
+    :param number_of_points: int
+    :return: fit_curve: ndarray, shape(2,N)
     """
     if max_x<min_x:
         raise ArithmeticError
