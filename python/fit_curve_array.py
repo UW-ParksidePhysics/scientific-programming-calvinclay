@@ -2,7 +2,7 @@
 This prints x and y values in an array which the y values are computed by the quadratic equation
 """
 
-__author__ = 'Michael Hotchkiss'
+__author__ = 'Calvin Clay'
 import numpy as np
 
 
