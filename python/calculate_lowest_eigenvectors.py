@@ -3,7 +3,7 @@ Calculates lowest eigenvector and eigenvalue of a matrix.
 """
 
 __author__ = 'Michael Hotchkiss and Calvin Clay'
-import numpy as np
+import numpy as np 
 
 
 def lowest_eigenvector(square_matrix, number_of_eigenvectors):
