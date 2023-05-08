@@ -2,7 +2,7 @@
 Read in two columns of data from text file of arbitrary length
 """
 
-__author__ = 'Michael Hotchkiss'
+__author__ = 'Calvin Clay'
 
 import numpy as np
 
