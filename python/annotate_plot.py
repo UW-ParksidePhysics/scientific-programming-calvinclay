@@ -1,3 +1,9 @@
+"""
+Plotting by annotating a dictionary and its values
+"""
+
+__author__ =  'Michael Hotchkiss and Calvin Clay'
+
 import numpy as np
 import matplotlib.pyplot as plt
 
