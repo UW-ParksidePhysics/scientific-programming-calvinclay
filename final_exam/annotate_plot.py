@@ -25,7 +25,7 @@ def annotate_plot(annotations):
             Value of the font size in pixels
     :return:
     """
-    plt.txt(annotations['postion'][0],annotations['position'][1],annotations['string'],
+    plt.text(annotations['position'][0],annotations['position'][1],annotations['string'],
             horizontalalignment= annotations['alignment'][0], verticalalignment=annotations['alignment'][1],
             fontsize=annotations['fontsize'])
 
@@ -35,7 +35,7 @@ def annotate_plot(annotations):
 if __name__ == "__main__":
     from datetime import date
     import numpy as np
-    name = 'Michael Hotchkiss'
+    name = 'Calvin Clay'
     annotations = {'string': f"Created by {name} {date.today().isoformat()}",
                    'position': np.array([4.75, 9.5]), 'alignment': ['left', 'bottom'], 'fontsize': 10}
 
