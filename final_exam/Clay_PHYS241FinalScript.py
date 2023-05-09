@@ -59,4 +59,7 @@ plt.show()
 potential = 'square'
 Ndim = 90
 parameter = 100
-matrix = generate_matrix(min_x, max_x, Ndim, potential, parameter)
+matrix = generate_matrix(-10, 10, Ndim, potential, parameter)
+print(matrix)
+eigenvalues, eigenvectors = lowest_eigenvector(matrix, number_of_eigenvectors=([0],[1],[2]))
+print(f'eigenvalues{eigenvectors}')
