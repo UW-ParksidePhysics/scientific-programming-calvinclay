@@ -1,4 +1,4 @@
-from scipy.constants import angstrom, physical_constants
+from scipy.constants import angstrom, physical_constants, giga
 
 
 def convert_units(value, units):
@@ -8,7 +8,7 @@ def convert_units(value, units):
         new_values = value * physical_constants['Rydberg constant times hc in eV'][0]
     elif units == 'rydberg/cubic bohr':
         new_values = value * physical_constants['Rydberg constant times hc in J'][0]/\
-            physical_constants['Bohr radius'][0]
+            physical_constants['Bohr radius'][0]**3 / giga
     else:
         new_values = value
     return new_values
